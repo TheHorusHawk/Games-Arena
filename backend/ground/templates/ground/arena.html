@@ -1,0 +1,30 @@
+{% extends "ground/layout.html" %}
+{% load static %}
+
+{% block body %}
+<h1>Welcome to the Games Arena, {{nickname}}</h1>
+
+List of all the users currently online
+<ul>
+{% for player in players_online %}
+<li>{{player}}
+{% if player != nickname %}
+<button class="invite" id=player>Invite to a game!</button>
+</li>
+{% endif %}
+{% endfor %}
+</ul>
+
+List of all the users currently not online
+<ul>
+{% for player in players_offline %}
+<li>{{player}}</li>
+{% endfor %}
+</ul>
+
+<button id="in_out_button">Get in!</button>
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'ground/arena.js' %}"></script>
+{% endblock script%}

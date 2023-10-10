@@ -1,0 +1,18 @@
+{% extends "ground/layout.html" %}
+
+{% block body %}
+
+{% if message %}
+<div>{{ message }}</div>
+{% endif %}
+<h1>You're about to enter the Games Arena</h1>
+
+<div id="new_player_form">
+    <h2>Choose your nickname:</h2>
+    <form action="{% url 'index' %}" method="post">
+        {% csrf_token %}
+        {{playerForm}}
+        <p id="submit_button"><input class="btn btn-primary" type="submit" value="Enter the Arena"></p>
+    </form>
+</div>
+{% endblock %}
