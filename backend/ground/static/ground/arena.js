@@ -1,13 +1,15 @@
-//old js file for button_clicking
+//Frontend JS
+console.log("loaded")
 
 document.addEventListener('DOMContentLoaded', function () {
 
     //use edit buttons to activate edit mode 
-    let in_out_button = document.getElementById("in_out_button");
+    let in_button = document.getElementById("in_button");
+    in_button.innerHTML="Javascript loaded"
     /*in_out_button.forEach((currentValue, currentIndex, listObj) => {
         currentValue.addEventListener('click', (value) => get_in(value))
     })*/
-    in_out_button.addEventListener('click',(x) => get_in(x))
+    in_button.addEventListener('click',(x) => get_in(x))
 });
 
 function get_in(event) {
@@ -15,8 +17,9 @@ function get_in(event) {
     button.innerText = 'Get out!';
     console.log(button.innerHTML)
     console.log("Clicked3")
-    fetch('/ground/toggle_in', {
+    fetch('toggle_in', {
         method: 'POST',
         body: JSON.stringify({
         })
     })
+}

@@ -5,11 +5,23 @@ from .models import Player
 from django.db import IntegrityError
 from django.views.decorators.csrf import csrf_exempt
 from django.core.cache import cache
+from django.urls import reverse
 import datetime
+
+from django import forms
 
 # Create your views here.
 
+#API
+def toggle_in(request):
+    """Will activate middleware and put the player in"""
+    return HttpResponseRedirect(reverse("arena"))
 #FORMS
+
+
+class buttonForm(forms.Form):
+    pass
+
 
 class newPlayer(forms.Form):
     body = forms.CharField(label = "Nickname",widget=forms.TextInput(attrs={'maxlength':'20','autofocus':'autofocus'}))
@@ -69,7 +81,8 @@ def arena(request):
     return render(request, "ground/arena.html", {
         "players_online":players_online,
         "players_offline":players_offline,
-        "nickname":request.session["Nickname"]
+        "nickname":request.session["Nickname"],
+        "buttonForm":buttonForm(),
     })
 
 def tictactoe(request, PlayerOne, PlayerTwo):

@@ -22,7 +22,12 @@ List of all the users currently not online
 {% endfor %}
 </ul>
 
-<button id="in_out_button">Get in!</button>
+ <form action="{% url 'get_in' %}" method="post">
+        {% csrf_token %}
+        {{buttonForm}}
+        <input class="btn btn-primary" type="Submit" value="Still here?">
+    </form>
+
 {% endblock %}
 
 {% block script %}

@@ -6,7 +6,7 @@ from django.conf import settings
 
 class ActiveUserMiddleware():
     def __init__(self, get_response):
-        """Initializes de perennial list of online users with no one online"""
+        """Initializes the perennial list of online users with no one online"""
         empty_dict = {}
         cache.set("last_seen_online",empty_dict,None)
         self.get_response = get_response
