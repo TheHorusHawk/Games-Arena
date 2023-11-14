@@ -16,9 +16,8 @@ from django import forms
 def toggle_in(request):
     """Will activate middleware and put the player in"""
     return HttpResponseRedirect(reverse("arena"))
+
 #FORMS
-
-
 class buttonForm(forms.Form):
     pass
 
@@ -33,6 +32,8 @@ def put_online(nickname):
     seen_online = cache.get("last_seen_online")
     seen_online[nickname]=datetime.datetime.now()
     cache.set("last_seen_online", seen_online, None)
+
+
 
 def index(request):
     """Welcome screen. Checks or creates Nickname in session and redirects to the arena."""
@@ -85,7 +86,11 @@ def arena(request):
         "buttonForm":buttonForm(),
     })
 
-def tictactoe(request, PlayerOne, PlayerTwo):
-    return render(request,"ground/tictactoe.html", {
-        "message":"I will implement tic-tac-toe here"
+def tictactoe(request, **kwargs):
+    # return render(request,"ground/tictactoe.html", {
+    #     "message":"I will implement tic-tac-toe here",
+    # })
+    return render(request, "ground/index.html", {
+        "message": "I will implement tictactoe.",
+        "playerForm": newPlayer()
     })
