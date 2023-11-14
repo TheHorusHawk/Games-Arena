@@ -4,9 +4,22 @@ from django.db import models
 class Player(models.Model):
     nickname = models.CharField(max_length=20, unique=True)
 
+class TicTacToeMatrix(models.Model):
+    sq00 = models.PositiveSmallIntegerField(default=0)
+    sq01 = models.PositiveSmallIntegerField(default=0)
+    sq02 = models.PositiveSmallIntegerField(default=0)
+    sq10 = models.PositiveSmallIntegerField(default=0)
+    sq11 = models.PositiveSmallIntegerField(default=0)
+    sq12 = models.PositiveSmallIntegerField(default=0)
+    sq20 = models.PositiveSmallIntegerField(default=0)
+    sq21 = models.PositiveSmallIntegerField(default=0)
+    sq22 = models.PositiveSmallIntegerField(default=0)
+
 class Game(models.Model):
-    # Player1 = Player.ForeignKey
-    # Player2 = Player.ForeighKey
+    player1 = models.ForeignKey(
+        Player, on_delete=models.CASCADE, related_name="player1")
+    player2 = models.ForeignKey(
+        Player, on_delete=models.CASCADE, related_name="player2")
+    board = models.ForeignKey(TicTacToeMatrix, on_delete=models.CASCADE, related_name="board")
     # Gamestate somehow. Nine variables? Sq00, Sq01, s02, Sq10, Sq11 ...
-    pass
 
