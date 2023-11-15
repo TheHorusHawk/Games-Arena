@@ -90,7 +90,6 @@ def tictactoe(request, **kwargs):
     # return render(request,"ground/tictactoe.html", {
     #     "message":"I will implement tic-tac-toe here",
     # })
-    return render(request, "ground/index.html", {
-        "message": "I will implement tictactoe.",
-        "playerForm": newPlayer()
+    return render(request, "ground/tictactoe.html", {
+        "message": "I will implement tictactoe."
     })
