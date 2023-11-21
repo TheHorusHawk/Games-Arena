@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django import forms
-from .models import Player
+from .models import Player, Game
 from django.db import IntegrityError
 from django.views.decorators.csrf import csrf_exempt
 from django.core.cache import cache
@@ -87,9 +87,23 @@ def arena(request):
     })
 
 def tictactoe(request, **kwargs):
-    # return render(request,"ground/tictactoe.html", {
-    #     "message":"I will implement tic-tac-toe here",
-    # })
+    newGame = Game(player1=Player(nickname=kwargs['Player1']), player2=Player(
+        nickname=kwargs['Player2']))
+
     return render(request, "ground/tictactoe.html", {
-        "message": "I will implement tictactoe."
+        "message": "I will implement tictactoe.",
+
     })
+
+# TICTACTOE object:
+#     var playertomove
+#     init (if Game between these two not exist)
+#     newGame = Game(player1=Player(nickname=kwargs['Player1']), player2=Player(
+#         nickname=kwargs['Player2']))
+#     var playertomove = Player1
+
+#     run:
+#         render, etc.
+    makemove - change sqxx with playercurrentlyplaying namesymbol. 
+    Make sure request comes from him.
+    
