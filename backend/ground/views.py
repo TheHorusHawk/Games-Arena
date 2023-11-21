@@ -104,6 +104,6 @@ def tictactoe(request, **kwargs):
 
 #     run:
 #         render, etc.
-    makemove - change sqxx with playercurrentlyplaying namesymbol. 
-    Make sure request comes from him.
+    # makemove - change sqxx with playercurrentlyplaying namesymbol. 
+    # Make sure request comes from him.
     
