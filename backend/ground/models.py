@@ -20,6 +20,6 @@ class Game(models.Model):
         Player, on_delete=models.CASCADE, related_name="player1")
     player2 = models.ForeignKey(
         Player, on_delete=models.CASCADE, related_name="player2")
-    board = models.ForeignKey(TicTacToeMatrix, on_delete=models.CASCADE, related_name="board")
+    board = models.OneToOneField(TicTacToeMatrix, on_delete=models.CASCADE, related_name="board")
     # Gamestate somehow. Nine variables? Sq00, Sq01, s02, Sq10, Sq11 ...
 

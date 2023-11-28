@@ -92,7 +92,7 @@ def tictactoe(request, **kwargs):
 
     return render(request, "ground/tictactoe.html", {
         "message": "I will implement tictactoe.",
-
+        "game":newGame,
     })
 
 # TICTACTOE object:
