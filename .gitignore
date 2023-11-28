@@ -1,1 +1,5 @@
 .vscode
+db.sqlite3
+admin.cpython-38.pyc
+models.cpython-38.pyc
+views.cpython-38.pyc

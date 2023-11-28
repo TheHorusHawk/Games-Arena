@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django import forms
-from .models import Player, Game
+from .models import Player, Game, TicTacToeMatrix
 from django.db import IntegrityError
 from django.views.decorators.csrf import csrf_exempt
 from django.core.cache import cache
@@ -87,12 +87,32 @@ def arena(request):
     })
 
 def tictactoe(request, **kwargs):
-    newGame = Game(player1=Player(nickname=kwargs['Player1']), player2=Player(
-        nickname=kwargs['Player2']))
+    #Try/catch?Gets players from database - ife they exist
+    try:
+        player1 = Player.objects.get(nickname=kwargs['Player1'])
+        player2 = Player.objects.get(nickname=kwargs['Player2'])
+    except:
+        return HttpResponseRedirect(reverse("arena"))
+    
+    #Checks if game exists
+    try:
+        thisGame = Game.objects.get(player1=player1, player2=player2)
+    except:
+        #if not make new one
+        board = TicTacToeMatrix()
+        board.save()
+        newGame = Game(player1=player1, player2=player2, board=board)     
+        newGame.save()
+        thisGame = newGame
+    #board = getattr(newGame, "board")
+    #otherwise get game from db
+
+    board = thisGame.board
 
     return render(request, "ground/tictactoe.html", {
         "message": "I will implement tictactoe.",
-        "game":newGame,
+        "game":thisGame,
+        "board":board,
     })
 
 # TICTACTOE object:
