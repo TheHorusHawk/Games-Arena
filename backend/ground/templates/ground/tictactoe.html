@@ -41,4 +41,8 @@
         <div class="col4 square">{{ board.sq22 }}</div>
     </div>
 </div>
+
+{% if toPlay %}
+<script src="{% static 'ground/tictactoeactive.js' %}"></script>
+{% endif %}
 {% endblock %}
