@@ -1,4 +1,9 @@
 {% extends "ground/layout.html" %}
+{% load static %}
+
+{% block styles %}
+<link href="{% static 'ground/tictactoe.css' %}" rel="stylesheet">
+{% endblock %}
 
 {% block body %}
 
@@ -12,8 +17,28 @@
 <h3>We have game</h3>
 {% endif %}
 
-<p>{{ board.sq00 }}  {{ board.sq01 }} {{ board.sq02 }}</p>
-<p>{{ board.sq10 }}  {{ board.sq11 }} {{ board.sq12 }}</p>
-<p>{{ board.sq20 }}  {{ board.sq21 }} {{ board.sq22 }}</p>
+<div class="container">
+    <div class="row">
 
+    {% comment %}
+    Check if sqxx == 0. If so, then empty
+
+    {{ board.sq01 }} {{ board.sq02 }}</p> 
+
+    {% endcomment %}
+        <div class="col4 square">{{ board.sq00 }}</div>
+        <div class="col4 square">{{ board.sq01 }}</div>
+        <div class="col4 square">{{ board.sq02 }}</div>
+    </div>
+    <div class="row">
+        <div class="col4 square">{{ board.sq10 }}</div>
+        <div class="col4 square">{{ board.sq11 }}</div>
+        <div class="col4 square">{{ board.sq12 }}</div>
+    </div>
+    <div class="row">
+        <div class="col4 square">{{ board.sq20 }}</div>
+        <div class="col4 square">{{ board.sq21 }}</div>
+        <div class="col4 square">{{ board.sq22 }}</div>
+    </div>
+</div>
 {% endblock %}
