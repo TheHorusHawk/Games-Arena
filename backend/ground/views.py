@@ -101,18 +101,22 @@ def tictactoe(request, **kwargs):
         #if not make new one
         board = TicTacToeMatrix()
         board.save()
-        newGame = Game(player1=player1, player2=player2, board=board)     
+        newGame = Game(player1=player1, player2=player2, board=board, activePlayer=player1)     
         newGame.save()
         thisGame = newGame
     #board = getattr(newGame, "board")
     #otherwise get game from db
 
     board = thisGame.board
+    activePlayer=thisGame.activePlayer
 
+    toPlay = request.session["Nickname"] == activePlayer.nickname
+    
     return render(request, "ground/tictactoe.html", {
-        "message": "I will implement tictactoe.",
+        "message": "I am implementing tictactoe.",
         "game":thisGame,
         "board":board,
+        "toPlay":toPlay,
     })
 
 # TICTACTOE object:
