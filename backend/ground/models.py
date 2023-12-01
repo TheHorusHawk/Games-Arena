@@ -21,3 +21,4 @@ class Game(models.Model):
     player2 = models.ForeignKey(
         Player, on_delete=models.CASCADE, related_name="player2")
     board = models.OneToOneField(TicTacToeMatrix, on_delete=models.CASCADE, related_name="board")
+    activePlayer = models.ForeignKey(Player, on_delete=models.CASCADE, related_name="activePlayer", default=42)
