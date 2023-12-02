@@ -3,10 +3,11 @@ document.addEventListener('DOMContentLoaded', function () {
     squares.forEach(
         (square) => {
             if (square.innerHTML == "0") {
-                square.innerHTML = "Button"
+                const button = document.createElement("button")
+                button.id = square.id;
+                square.replaceWith(button)
             }
         }
-
     )
 //     use edit buttons to activate edit mode 
 //     let in_button = document.getElementById("in_button");
