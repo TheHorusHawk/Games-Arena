@@ -18,29 +18,45 @@
 {% endif %}
 
 <div class="container">
-    <div class="row">
+    <table>
+        <tr>
+        {% comment %}
+        Check if sqxx == 0. If so, then empty
 
-    {% comment %}
-    Check if sqxx == 0. If so, then empty
+        {{ board.sq01 }} {{ board.sq02 }}</p> 
 
-    {{ board.sq01 }} {{ board.sq02 }}</p> 
-
-    {% endcomment %}
-        <div class="col4 square">{{ board.sq00 }}</div>
-        <div class="col4 square">{{ board.sq01 }}</div>
-        <div class="col4 square">{{ board.sq02 }}</div>
-    </div>
-    <div class="row">
-        <div class="col4 square">{{ board.sq10 }}</div>
-        <div class="col4 square">{{ board.sq11 }}</div>
-        <div class="col4 square">{{ board.sq12 }}</div>
-    </div>
-    <div class="row">
-        <div class="col4 square">{{ board.sq20 }}</div>
-        <div class="col4 square">{{ board.sq21 }}</div>
-        <div class="col4 square">{{ board.sq22 }}</div>
-    </div>
-</div>
+        {% endcomment %}
+            <td><div class="col4 square" id="sq00">{{ board.sq00 }}</div></td>
+            <td>
+                <div class="col4 square" id="sq01">{{ board.sq01 }}</div>
+            </td>
+            <td>
+                <div class="col4 square" id="sq02">{{ board.sq02 }}</div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="col4 square" id="sq10">{{ board.sq10 }}</div>
+            </td>
+            <td>
+                <div class="col4 square" id="sq11">{{ board.sq11 }}</div>
+            </td>
+            <td>
+                <div class="col4 square" id="sq12">{{ board.sq12 }}</div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="col4 square" id="sq20">{{ board.sq20 }}</div>
+            </td>
+            <td>
+                <div class="col4 square" id="sq21">{{ board.sq21 }}</div>
+            </td>
+            <td>
+                <div class="col4 square" id="sq22">{{ board.sq22 }}</div>
+            </td>
+        </tr>
+    </table>
 
 {% if toPlay %}
 <script src="{% static 'ground/tictactoeactive.js' %}"></script>
