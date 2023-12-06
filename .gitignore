@@ -4,6 +4,4 @@ admin.cpython-38.pyc
 models.cpython-38.pyc
 views.cpython-38.pyc
 backend/ground/migrations/
-backend/ground/migrations/0006_alter_game_board.py
-backend/ground/migrations/__pycache__/0006_alter_game_board.cpython-38.pyc
-backend/ground/__pycache__/urls.cpython-38.pyc
+backend/ground/__pycache__/
