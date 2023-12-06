@@ -117,8 +117,18 @@ def tictactoe(request, **kwargs):
 
     # If POST it's a move
     if request.method == "POST":
+        #loads which square information from request
         square = json.loads(request.body)['id']
-        print(square)
+        isPlayer1 = thisGame.activePlayer == thisGame.player1
+        # set correct integer to record play (1 forplayer 1, 2 for player 2)
+        integer = ((2, 1)[isPlayer1])
+        setattr(thisGame.board, square, integer)
+        thisGame.board.save()
+        # changes active player
+        newActivePlayer = ((thisGame.player1, thisGame.player2)[isPlayer1])
+        thisGame.activePlayer = newActivePlayer
+        thisGame.save()
+
     
     board = thisGame.board
     activePlayer=thisGame.activePlayer
