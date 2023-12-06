@@ -8,15 +8,11 @@ document.addEventListener('DOMContentLoaded', function () {
                 square.replaceWith(button)
                 button.addEventListener('click', (value) => play(value))
             }
+            else {
+                square.innerHTML == "1" ? square.innerHTML = "X" : square.innerHTML = "O";
+            }
         }
     )
-//     use edit buttons to activate edit mode 
-//     let in_button = document.getElementById("in_button");
-//     in_button.innerHTML = "Javascript loaded"
-//     /*in_out_button.forEach((currentValue, currentIndex, listObj) => {
-//         currentValue.addEventListener('click', (value) => get_in(value))
-//     })*/
-//     in_button.addEventListener('click', (x) => get_in(x))
 });
 
 function play(event) {

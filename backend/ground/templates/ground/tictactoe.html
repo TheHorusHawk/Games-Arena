@@ -57,8 +57,12 @@
             </td>
         </tr>
     </table>
-
+</div>
 {% if toPlay %}
+<p>Please make a move by clicking on a square.</p>
 <script src="{% static 'ground/tictactoeactive.js' %}"></script>
+{% else %}
+<p>Your partner to play.</p>
+<script src="{% static 'ground/tictactoepassive.js' %}"></script>
 {% endif %}
 {% endblock %}
