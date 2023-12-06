@@ -7,6 +7,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.core.cache import cache
 from django.urls import reverse
 import datetime
+import json
 
 from django import forms
 
@@ -69,17 +70,23 @@ def index(request):
     })
 
 
-def arena(request):
+def arena(request, *message):
     """Opens the arena proper. Renders list of those who are online and not online."""
     players_online = cache.get("last_seen_online")
     all_players = list(Player.objects.all())
     # go through players_online, remove those instances from players offline
     players_offline = []
+    #Puts a message in the message variable, empty string if none is supplied
+    if message:
+        message=message[0]
+    else:
+        message=""
     for player in all_players:
         for player_online in players_online:
             if (player.nickname != player_online):
                 players_offline.append(player.nickname)          
     return render(request, "ground/arena.html", {
+        "message": message,
         "players_online":players_online,
         "players_offline":players_offline,
         "nickname":request.session["Nickname"],
@@ -92,7 +99,8 @@ def tictactoe(request, **kwargs):
         player1 = Player.objects.get(nickname=kwargs['Player1'])
         player2 = Player.objects.get(nickname=kwargs['Player2'])
     except:
-        return HttpResponseRedirect(reverse("arena"))
+        message = "Can't start Tic Tac Toe game, players don't seem to exist"
+        return arena (request, message)
     
     #Checks if game exists
     try:
@@ -107,6 +115,11 @@ def tictactoe(request, **kwargs):
     #board = getattr(newGame, "board")
     #otherwise get game from db
 
+    # If POST it's a move
+    if request.method == "POST":
+        square = json.loads(request.body)['id']
+        print(square)
+    
     board = thisGame.board
     activePlayer=thisGame.activePlayer
 

@@ -2,6 +2,11 @@
 {% load static %}
 
 {% block body %}
+
+{% if message %}
+<p> {{ message }} </p>
+{% endif %}
+
 <h1>Welcome to the Games Arena, {{nickname}}</h1>
 
 List of all the users currently online
