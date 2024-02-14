@@ -26,7 +26,7 @@ function play(event) {
         }),
         credentials: 'same-origin',
         headers: { "X-CSRFToken": csrftoken }
-    })
+    }).then(()=> (location.reload()))
 }
 
 //added to add csrf token

@@ -1,4 +1,10 @@
 td {
-    min-width: 30%;
+    min-width: 10vh;
     border: 1px solid black;
 }
+
+tr {
+    height:10vh;
+    width: 10vh;
+}
+

@@ -115,8 +115,9 @@ def tictactoe(request, **kwargs):
     #board = getattr(newGame, "board")
     #otherwise get game from db
 
-    # If POST it's a move
     if request.method == "POST":
+        """Implements making a move"""
+        #IF request.session.nickname == thisGame.activePlayer
         #loads which square information from request
         square = json.loads(request.body)['id']
         isPlayer1 = thisGame.activePlayer == thisGame.player1
@@ -137,6 +138,7 @@ def tictactoe(request, **kwargs):
     
     return render(request, "ground/tictactoe.html", {
         "message": "I am implementing tictactoe.",
+        "activePlayer": thisGame.activePlayer.nickname,
         "game":thisGame,
         "board":board,
         "toPlay":toPlay,
