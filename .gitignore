@@ -5,3 +5,5 @@ models.cpython-38.pyc
 views.cpython-38.pyc
 backend/ground/migrations/
 backend/ground/__pycache__/
+backend/arena/__pycache__/settings.cpython-38.pyc
+backend/arena/__pycache__/asgi.cpython-38.pyc

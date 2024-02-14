@@ -6,9 +6,11 @@
 {% endblock %}
 
 {% block body %}
+{{ room_name|json_script:"room-name" }}
+<input id="socket_button" type="button" value="SOcKET">
 
 <h1>You will play Tic-Tac-Toe!</h1>
-
+<h2 id="turn">It's your turn!</h2>
 {% if message %}
 <div>{{ message }}</div>
 {% endif %}
@@ -60,9 +62,17 @@
 </div>
 {% if toPlay %}
 <p>Please make a move by clicking on a square.</p>
-<script src="{% static 'ground/tictactoeactive.js' %}"></script>
+{% comment %} <script src="{% static 'ground/tictactoeactive.js' %}"></script> {% endcomment %}
+<script>
+    document.getElementById('turn').style.display = 'block'
+</script>
 {% else %}
 <p>{{ activePlayer }} to play.</p>
-<script src="{% static 'ground/tictactoepassive.js' %}"></script>
+{% comment %} <script src="{% static 'ground/tictactoepassive.js' %}"></script> {% endcomment %}
+<script>
+    document.getElementById('turn').style.display = 'none'
+</script>
 {% endif %}
+{% comment %} <script src="{% static 'ground/tictactoesocket.js' %}"> {% endcomment %}
+<script src="{% static 'ground/tictactoe.js' %}"></script>
 {% endblock %}

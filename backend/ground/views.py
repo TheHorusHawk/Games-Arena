@@ -134,6 +134,7 @@ def tictactoe(request, **kwargs):
     activePlayer=thisGame.activePlayer
 
     toPlay = request.session["Nickname"] == activePlayer.nickname
+    room_name = f"{player1.nickname}{player2.nickname}"
     
     return render(request, "ground/tictactoe.html", {
         "message": "I am implementing tictactoe.",
@@ -141,6 +142,7 @@ def tictactoe(request, **kwargs):
         "game":thisGame,
         "board":board,
         "toPlay":toPlay,
+        "room_name": room_name,
     })
 
 # TICTACTOE object:
