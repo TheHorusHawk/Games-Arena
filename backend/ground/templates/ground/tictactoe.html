@@ -62,17 +62,14 @@
 </div>
 {% if toPlay %}
 <p>Please make a move by clicking on a square.</p>
-{% comment %} <script src="{% static 'ground/tictactoeactive.js' %}"></script> {% endcomment %}
 <script>
     document.getElementById('turn').style.display = 'block'
 </script>
 {% else %}
 <p>{{ activePlayer }} to play.</p>
-{% comment %} <script src="{% static 'ground/tictactoepassive.js' %}"></script> {% endcomment %}
 <script>
     document.getElementById('turn').style.display = 'none'
 </script>
 {% endif %}
-{% comment %} <script src="{% static 'ground/tictactoesocket.js' %}"> {% endcomment %}
 <script src="{% static 'ground/tictactoe.js' %}"></script>
 {% endblock %}
