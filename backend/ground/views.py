@@ -35,7 +35,6 @@ def put_online(nickname):
     cache.set("last_seen_online", seen_online, None)
 
 
-
 def index(request):
     """Welcome screen. Checks or creates Nickname in session and redirects to the arena."""
     #Comment out once working
