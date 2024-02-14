@@ -7,8 +7,6 @@ from channels.generic.websocket import WebsocketConsumer
 class TicTacToe(WebsocketConsumer):
     def connect(self):
         self.room_name = self.scope["url_route"]["kwargs"]["room_name"]
-        print(self.room_name)
-        print("I got something")
         self.room_group_name = f"game_{self.room_name}"
 
         # Join room group
