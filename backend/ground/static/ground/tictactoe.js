@@ -34,10 +34,9 @@ document.addEventListener("DOMContentLoaded", () => {
         squares.forEach(
             (square) => {
                 if (square.innerHTML == "0") {
-                    const button = document.createElement("button")
-                    button.id = square.id;
-                    square.replaceWith(button)
-                    button.addEventListener('click', (value) => play(value))
+                    square.innerHTML = " ";
+                    square.parentNode.style.setProperty('--td-background-color', '#383d38');
+                    square.parentNode.addEventListener('click', (value) => play(value))
                 }
                 else {
                     square.innerHTML == "1" ? square.innerHTML = "X" : square.innerHTML = "O";
@@ -50,13 +49,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 function play(event) {
-    const button = event.target;
+    const square = event.target.children[0];
     const csrftoken = getCookie('csrftoken')
-    console.log(button.id)
+    console.log(square.id)
     fetch('', {
         method: 'POST',
         body: JSON.stringify({
-            id: button.id
+            id: square.id
         }),
         credentials: 'same-origin',
         headers: { "X-CSRFToken": csrftoken }
