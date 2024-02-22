@@ -44,14 +44,12 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         )
     }
-
+    document.getElementById('restart').addEventListener('click',(value) => restartGame(value))
 })
-
 
 function play(event) {
     const square = event.target.children[0];
     const csrftoken = getCookie('csrftoken')
-    console.log(square.id)
     fetch('', {
         method: 'POST',
         body: JSON.stringify({
@@ -63,10 +61,25 @@ function play(event) {
         gameSocket.send(JSON.stringify({
             'message': "Sup"
         }))
-        console.log("sent?")
     })
 }
 
+//resets and restarts the game
+function restartGame(event) {
+    const csrftoken = getCookie('csrftoken')
+    fetch('', {
+        method: 'POST',
+        body: JSON.stringify({
+            id: 'Restart'
+        }),
+        credentials: 'same-origin',
+        headers: { "X-CSRFToken": csrftoken }
+    }).then(() => {
+        gameSocket.send(JSON.stringify({
+            'message': "Sup"
+        }))
+    })
+}
 //added to add csrf token
 function getCookie(name) {
     let cookieValue = null;

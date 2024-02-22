@@ -113,23 +113,31 @@ def tictactoe(request, **kwargs):
         thisGame = newGame
     
     if request.method == "POST":
-        """Implements making a move"""
+        """Implements making a move or restarting game"""
         #IF request.session.nickname == thisGame.activePlayer
         #loads which square information from request
         square = json.loads(request.body)['id']
-        isPlayer1 = thisGame.activePlayer == thisGame.player1
-        # set correct integer to record play (1 for player 1, 2 for player 2)
-        integer = ((2, 1)[isPlayer1])
-        setattr(thisGame.board, square, integer)
-        thisGame.board.save()
-        # changes active player
-        newActivePlayer = ((thisGame.player1, thisGame.player2)[isPlayer1])
-        thisGame.activePlayer = newActivePlayer
-        thisGame.save()
+        if square == 'Restart':
+            thisGame.delete()
+            board = TicTacToeMatrix()
+            board.save()
+            newGame = Game(player1=player1, player2=player2,board=board, activePlayer=player1)
+            newGame.save()
+            thisGame = newGame
+        else:
+            isPlayer1 = thisGame.activePlayer == thisGame.player1
+            # set correct integer to record play (1 for player 1, 2 for player 2)
+            integer = ((2, 1)[isPlayer1])
+            setattr(thisGame.board, square, integer)
+            thisGame.board.save()
+            # changes active player
+            newActivePlayer = ((thisGame.player1, thisGame.player2)[isPlayer1])
+            thisGame.activePlayer = newActivePlayer
+            thisGame.save()
 
     #checks if game is over
     over = False
-    if (checkOver(thisGame)):
+    if checkOver(thisGame):
         over = True
 
     board = thisGame.board
