@@ -93,7 +93,7 @@ def arena(request, *message):
     })
 
 def tictactoe(request, **kwargs):
-    #Try/catch?Gets players from database - ife they exist
+    #Try/catch?Gets players from database - if they exist if not back to arena
     try:
         player1 = Player.objects.get(nickname=kwargs['Player1'])
         player2 = Player.objects.get(nickname=kwargs['Player2'])
@@ -111,16 +111,14 @@ def tictactoe(request, **kwargs):
         newGame = Game(player1=player1, player2=player2, board=board, activePlayer=player1)     
         newGame.save()
         thisGame = newGame
-    #board = getattr(newGame, "board")
-    #otherwise get game from db
-
+    
     if request.method == "POST":
         """Implements making a move"""
         #IF request.session.nickname == thisGame.activePlayer
         #loads which square information from request
         square = json.loads(request.body)['id']
         isPlayer1 = thisGame.activePlayer == thisGame.player1
-        # set correct integer to record play (1 forplayer 1, 2 for player 2)
+        # set correct integer to record play (1 for player 1, 2 for player 2)
         integer = ((2, 1)[isPlayer1])
         setattr(thisGame.board, square, integer)
         thisGame.board.save()
@@ -129,20 +127,34 @@ def tictactoe(request, **kwargs):
         thisGame.activePlayer = newActivePlayer
         thisGame.save()
 
-    
-    board = thisGame.board
-    activePlayer=thisGame.activePlayer
+    #checks if game is over
+    over = False
+    if (True):
+        over = True
 
+    board = thisGame.board
+
+    activePlayer=thisGame.activePlayer
     toPlay = request.session["Nickname"] == activePlayer.nickname
-    room_name = f"{player1.nickname}{player2.nickname}"
     
+    room_name = f"{player1.nickname}{player2.nickname}"
+    message = "I am implementing tictactoe."
+    
+    #changes what is fed based on whether game is over
+    if (over):
+        message=f"Game over. {activePlayer.nickname} won"
+        activePlayer.nickname = 'None'
+        toPlay = False
+
+
     return render(request, "ground/tictactoe.html", {
-        "message": "I am implementing tictactoe.",
-        "activePlayer": thisGame.activePlayer.nickname,
+        "message": message,
+        "activePlayer": activePlayer.nickname,
         "game":thisGame,
         "board":board,
         "toPlay":toPlay,
         "room_name": room_name,
+        "over":over,
     })
 
 # TICTACTOE object:
