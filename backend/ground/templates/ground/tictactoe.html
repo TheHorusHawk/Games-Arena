@@ -7,7 +7,6 @@
 
 {% block body %}
 {{ room_name|json_script:"room-name" }}
-<input id="socket_button" type="button" value="SOcKET">
 
 <h1>You will play Tic-Tac-Toe!</h1>
 <h2 id="turn">It's your turn!</h2>
@@ -28,23 +27,23 @@
         {{ board.sq01 }} {{ board.sq02 }}</p> 
 
         {% endcomment %}
-            <td><div class="col4 square" id="sq00">{{ board.sq00 }}</div></td>
+            <td><div class="col4 square noughtscrosses" id="sq00">{{ board.sq00 }}</div></td>
             <td>
-                <div class="col4 square" id="sq01">{{ board.sq01 }}</div>
+                <div class="col4 square noughtscrosses" id="sq01">{{ board.sq01 }}</div>
             </td>
             <td>
-                <div class="col4 square" id="sq02">{{ board.sq02 }}</div>
+                <div class="col4 square noughtscrosses" id="sq02">{{ board.sq02 }}</div>
             </td>
         </tr>
         <tr>
             <td>
-                <div class="col4 square" id="sq10">{{ board.sq10 }}</div>
+                <div class="col4 square noughtscrosses" id="sq10">{{ board.sq10 }}</div>
             </td>
             <td>
-                <div class="col4 square" id="sq11">{{ board.sq11 }}</div>
+                <div class="col4 square noughtscrosses" id="sq11">{{ board.sq11 }}</div>
             </td>
             <td>
-                <div class="col4 square" id="sq12">{{ board.sq12 }}</div>
+                <div class="col4 square noughtscrosses" id="sq12">{{ board.sq12 }}</div>
             </td>
         </tr>
         <tr>
