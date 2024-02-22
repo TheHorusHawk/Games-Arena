@@ -135,11 +135,6 @@ def tictactoe(request, **kwargs):
             thisGame.activePlayer = newActivePlayer
             thisGame.save()
 
-    #checks if game is over
-    over = False
-    if checkOver(thisGame):
-        over = True
-
     board = thisGame.board
 
     activePlayer=thisGame.activePlayer
@@ -148,9 +143,15 @@ def tictactoe(request, **kwargs):
     room_name = f"{player1.nickname}{player2.nickname}"
     message = "I am implementing tictactoe."
     
+    over = checkOver(thisGame)
     #changes what is fed based on whether game is over
-    if (over):
-        message=f"Game over. It's a draw."
+    if (over[0]):
+        if over[1]=="draw":
+            message=f"Game over. It's a draw."
+        if over[1]=="player1":
+            message = f"Game over. {player1.nickname} won."
+        if over[1] == "player2":
+            message = f"Game over. {player2.nickname} won."
         activePlayer.nickname = 'None'
         toPlay = False
 
@@ -167,14 +168,59 @@ def tictactoe(request, **kwargs):
 
 #Checks if the game is over
 def checkOver(game):
-    if(sumAll(game.board) == 13):
-        return True
-    else:
-        return False
+    board = game.board
+    sum = sumAll(board)
+    #If 5 moves haven't been made, game can't be over
+    if sum < 7:
+        return (False,)
+    #Checks for win on each line/diagonal
+    win = checkwin(board.sq00, board.sq01, board.sq02)
+    if win[0]:
+        return win
+    win = checkwin(board.sq10, board.sq11, board.sq12)
+    if win[0]:
+        return win
+    win = checkwin(board.sq20, board.sq21, board.sq22)
+    if win[0]:
+        return win
+    win = checkwin(board.sq00, board.sq10, board.sq20)
+    if win[0]:
+        return win
+    win = checkwin(board.sq01, board.sq11, board.sq21)
+    if win[0]:
+        return win
+    win = checkwin(board.sq02, board.sq12, board.sq22)
+    if win[0]:
+        return win
+    win = checkwin(board.sq00, board.sq11, board.sq22)
+    if win[0]:
+        return win
+    win = checkwin(board.sq02, board.sq11, board.sq20)
+    if win[0]:
+        return win
+    #Checks if all the squares have been filled
+    if sum == 13:
+        return (True, "draw")
+    return (False,)
 
 
 def sumAll(board):
     return board.sq00+board.sq01+board.sq02+board.sq10+board.sq11+board.sq12+board.sq20+board.sq21+board.sq22
+
+def checkwin(a,b,c):
+    #If any square in line has not been filled can't be a win
+    if a==0 or b==0 or c==0:
+        return (False,)
+    #If it's three ones, player 1 wins
+    elif a+b+c == 3:
+        return (True, "player1")
+    #If it's three twos, player 2 wins
+    elif a+b+c == 6:
+        return (True, "player2")
+    else:
+        return (False,)
+
+
 # TICTACTOE object:
 #     var playertomove
 #     init (if Game between these two not exist)
