@@ -2,9 +2,12 @@ td {
     min-width: 10vh;
     border: 1px solid black;
 }
-
+ 
 tr {
     height:10vh;
     width: 10vh;
-}
+} 
 
+.noughtscrosses {
+    text-align: center;
+}
