@@ -129,7 +129,7 @@ def tictactoe(request, **kwargs):
 
     #checks if game is over
     over = False
-    if (True):
+    if (checkOver(thisGame)):
         over = True
 
     board = thisGame.board
@@ -142,7 +142,7 @@ def tictactoe(request, **kwargs):
     
     #changes what is fed based on whether game is over
     if (over):
-        message=f"Game over. {activePlayer.nickname} won"
+        message=f"Game over. It's a draw."
         activePlayer.nickname = 'None'
         toPlay = False
 
@@ -157,6 +157,16 @@ def tictactoe(request, **kwargs):
         "over":over,
     })
 
+#Checks if the game is over
+def checkOver(game):
+    if(sumAll(game.board) == 13):
+        return True
+    else:
+        return False
+
+
+def sumAll(board):
+    return board.sq00+board.sq01+board.sq02+board.sq10+board.sq11+board.sq12+board.sq20+board.sq21+board.sq22
 # TICTACTOE object:
 #     var playertomove
 #     init (if Game between these two not exist)
